@@ -81,7 +81,8 @@ public class ShortWsLocator extends WorkspaceLocator {
         final String digest = Util.getDigestOf(item.getFullName()).substring(0, 8);
         FilePath workspaceRoot = slave.getWorkspaceRoot();
         if (workspaceRoot == null) return null; // Slave went offline
-        FilePath newPath = workspaceRoot.child(itemName + digest);
+		String shortName = (itemName + digest).replace('%','_');
+        FilePath newPath = workspaceRoot.child(shortName);
 
         return newPath.getRemote().length() < def.getRemote().length()
                 ? newPath
